@@ -10,10 +10,18 @@ namespace TodoList.Api.Services;
 
 public class TokenService: ITokenService
 {
+    private readonly Secret _secret;
+
+
+    public TokenService(Secret secret)
+    {
+        _secret = secret;
+    }
+
     public string GenerateToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(Secret.SecretCode);
+        var key = Encoding.ASCII.GetBytes(_secret.SecretCode);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new Claim[]

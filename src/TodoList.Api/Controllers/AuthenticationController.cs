@@ -20,7 +20,6 @@ public class AuthenticationController: ControllerBase
     }
     
     [HttpPost]
-    [Route("login")]
     [AllowAnonymous]
     public async Task<ActionResult<dynamic>> Authenticate(string userName, string password)
     {

@@ -45,8 +45,8 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-
-var key = Encoding.ASCII.GetBytes(Secret.SecretCode);
+var secret = new Secret(builder.Configuration);
+var key = Encoding.ASCII.GetBytes(secret.SecretCode);
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -67,15 +67,12 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ITodoTaskRepository, TodoTaskRepository>();
+builder.Services.AddScoped<Secret>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
