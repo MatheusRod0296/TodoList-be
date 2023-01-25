@@ -24,6 +24,21 @@ public class TaskController: ControllerBase
         _todoTaskRepository = todoTaskRepository;
     }
 
+    /// <summary>
+    /// Cria uma nova tarefa.
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /Create
+    ///     {        
+    ///        "Nome": "Send documents",
+    ///        "description": "Send a copy of Rg to PoupaTempo",
+    ///        "DeadLine": "2023-01-30",
+    ///        "Priority": 3
+    ///     }
+    ///
+    /// </remarks>
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<dynamic>> Create([FromBody] TaskDto taskDto)

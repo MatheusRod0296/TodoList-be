@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Api.Domain.Interfaces.Repositories;
@@ -18,7 +19,7 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ActionResult<dynamic>> Create(string userName, string password)
+    public async Task<ActionResult<dynamic>> Create([Description("nome do usuario")]string userName, string password)
     {
         var user = new User
         {
